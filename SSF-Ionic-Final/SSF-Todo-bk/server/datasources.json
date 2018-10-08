@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "ssf-todo": {
+    "host": "",
+    "port": 0,
+    "url": "mongodb://brettw:Dozer1234@ds021969.mlab.com:21969/ssf-todo",
+    "database": "ssf-todo",
+    "password": "Dozer1234",
+    "name": "",
+    "user": "brettw",
+    "connector": "mongodb"
+  }
+}
