@@ -1,0 +1,145 @@
+<ion-content padding-left
+             padding-right>
+
+  <div class="process">
+    <div class="first-bounce"></div>
+    <div class="second-bounce"></div>
+  </div>
+
+  <h2 *ngIf="view === State.Authenticated"
+      text-center>
+    Hello no. {{user.id}}!
+  </h2>
+
+  <form [formGroup]="accountForm">
+    <ion-list *ngIf="view !== State.Confirm && view !== State.Authenticated"
+              no-lines>
+
+      <ion-item *ngIf="view === State.Create"
+                margin-bottom>
+
+        <ion-label>
+          <ion-icon name="person"
+                    color="white"></ion-icon>
+        </ion-label>
+        <ion-input formControlName="firstName"
+                   placeholder="First Name"
+                   type="name"
+                   spellcheck="false"
+                   autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="view === State.Create"
+                margin-bottom>
+
+        <ion-label>
+          <ion-icon name="person"
+                    color="white"></ion-icon>
+        </ion-label>
+        <ion-input formControlName="lastName"
+                   placeholder="Last Name"
+                   type="name"
+                   spellcheck="false"
+                   autocapitalize="off"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="view !== State.ChangePassword"
+                margin-bottom>
+
+        <ion-label>
+          <ion-icon color="white"
+                    name="mail"></ion-icon>
+        </ion-label>
+        <ion-input formControlName="email"
+                   placeholder="email"
+                   type="email"
+                   spellcheck="false"
+                   autocapitalize="off"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="view !== State.Recover">
+        <ion-label>
+          <ion-icon name="lock"
+                    color="white"></ion-icon>
+        </ion-label>
+        <ion-input formControlName="password"
+                   placeholder="password"
+                   type="password"
+                   spellcheck="false"
+                   autocapitalize="off"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="view === State.Login">
+      <button (click)="login()"
+              [disabled]="!email.valid || !password.valid"
+              ion-button
+              block
+              round
+              color="white"
+              type="button">login</button>
+
+      <button (click)="signUp()"
+              ion-button
+              block
+              margin-top
+              round
+              clear
+              small
+              color="white"
+              type="button">sign up</button>
+
+      <button (click)="recoverPassword()"
+              ion-button
+              block
+              margin-top
+              round
+              clear
+              small
+              color="white"
+              type="button">forgot password</button>
+    </div>
+
+    <button *ngIf="view === State.Create"
+            (click)="createAccount()"
+            [disabled]="!accountForm.valid"
+            ion-button
+            block
+            round
+            color="white"
+            type="button">create account</button>
+
+    <button *ngIf="view === State.ChangePassword"
+            (click)="setPassword()"
+            [disabled]="!password.valid"
+            ion-button
+            block
+            round
+            color="white"
+            type="button">change password</button>
+
+
+
+    <button (click)="back()"
+            *ngIf="view !== State.Login && view !== State.Authenticated"
+            ion-button
+            block
+            margin-top
+            round
+            clear
+            small
+            color="white"
+            type="button">{{ view === State.Confirm ? 'back' : 'cancel' }}</button>
+
+    <button (click)="logout()"
+            *ngIf="view === State.Authenticated"
+            ion-button
+            block
+            margin-top
+            round
+            clear
+            small
+            color="white"
+            type="button">log out</button>
+
+  </form>
+</ion-content>

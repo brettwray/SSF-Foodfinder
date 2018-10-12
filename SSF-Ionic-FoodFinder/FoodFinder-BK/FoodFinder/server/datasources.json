@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "foodfinder": {
+    "host": "",
+    "port": 0,
+    "url": "mongodb://foodfinderadmin:Dozer1234@ds119273.mlab.com:19273/foodfinder",
+    "database": "foodfinder",
+    "password": "Dozer1234",
+    "name": "foodfinder",
+    "user": "foodfinderadmin",
+    "connector": "mongodb"
+  }
+}
