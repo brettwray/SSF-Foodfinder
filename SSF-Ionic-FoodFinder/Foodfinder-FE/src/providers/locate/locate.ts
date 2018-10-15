@@ -8,11 +8,13 @@ declare var google;
 @Injectable()
 export class LocateProvider {
 
+
   map: any;
   marker: any;
-  service: any;
   infoWindow: any;
   placeMarker:any;
+  
+
 constructor(public http: HttpClient, public geolocation: Geolocation, public storage: Storage) {}
   
 getPosition() {
@@ -26,38 +28,51 @@ getPosition() {
   }
 async mapData() {
   let currentPos = {lat: await this.storage.get('lat'), lng: await this.storage.get('lng')}
-
+  
   let mapOptions = {
     zoom: 15,
     center: currentPos
   }
   this.map = new google.maps.Map(document.getElementById('map'), mapOptions)
   this.marker = new google.maps.Marker({position: currentPos, map: this.map})
-
-  this.service = new google.maps.places.PlacesService(this.map);
-  this.service.nearbySearch({
-    location: currentPos,
-    radius: 500,
-    type:['restaurant']
-  }, this.placeSearch);
-}
-  async placeSearch(results, status){
-    console.log('place search ran', results, status)
+  let service = new google.maps.places.PlacesService(this.map);
+  
+  let placeSearch = (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      let rand = results[(Math.random() * results.length) | 0]
-      this.placeMarker = new google.maps.marker({
-        map: await this.map,
-        position: rand.geometry.location
-      })
+    let rand = results[(Math.random() * results.length) | 0]
+    createMarker(rand);
     }
   }
+    
+    service.nearbySearch({
+    location: await currentPos,
+    radius: 1000,
+    type:['restaurant']
+  }, placeSearch);
+
+  let createMarker = async (place) => {
+    let placeLoc = place.geometry.location;
+        this.placeMarker = new google.maps.Marker({
+          map: await this.map,
+          position: placeLoc
+        });
+
+        google.maps.event.addListener(this.placeMarker, 'click', function() {
+          this.infowindow.setContent(place.name);
+          this.infowindow.open(this.map, this);
+        });
+  }
+
+}
+
 
 async drawMap(){
+  
   await this.map;
   await this.marker;
-  
   await this.placeMarker;
 }
 } 
+
 
 
