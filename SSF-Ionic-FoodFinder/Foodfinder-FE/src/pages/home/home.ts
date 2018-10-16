@@ -4,8 +4,6 @@ import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
-declare var google;
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

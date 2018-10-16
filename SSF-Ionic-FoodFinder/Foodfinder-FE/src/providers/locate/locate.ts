@@ -13,10 +13,10 @@ export class LocateProvider {
   marker: any;
   infoWindow: any;
   placeMarker:any;
-  
-
+  placeIcon = '../../assets/imgs/hamburger_emoji_64.png'
 constructor(public http: HttpClient, public geolocation: Geolocation, public storage: Storage) {}
   
+
 getPosition() {
     this.geolocation.getCurrentPosition().then((position)=> {
     this.storage.set('lat', position.coords.latitude);
@@ -54,20 +54,12 @@ async mapData() {
     let placeLoc = place.geometry.location;
         this.placeMarker = new google.maps.Marker({
           map: await this.map,
-          position: placeLoc
-        });
-
-        google.maps.event.addListener(this.placeMarker, 'click', function() {
-          this.infowindow.setContent(place.name);
-          this.infowindow.open(this.map, this);
+          position: placeLoc,
+          icon: this.placeIcon
         });
   }
-
 }
-
-
 async drawMap(){
-  
   await this.map;
   await this.marker;
   await this.placeMarker;

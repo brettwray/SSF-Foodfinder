@@ -1,6 +1,6 @@
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
-import { HttpResponse, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { IonicPage, Loading, LoadingController, Alert, AlertController, NavController, NavParams } from 'ionic-angular';
 import { Location } from '@angular/common';
