@@ -14,6 +14,7 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public LOCATE: LocateProvider) {
     platform.ready().then(() => {
+      //starts the cordova geolocation process as soon as the app is ready
       this.LOCATE.getPosition();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

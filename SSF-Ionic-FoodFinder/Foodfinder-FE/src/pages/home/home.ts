@@ -9,17 +9,22 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-
+Place_Marker;
+ 
 
 
   constructor(public navCtrl: NavController, public LOCATE: LocateProvider, public storage: Storage) {
     this.LOCATE.mapData();
+    this.Place_Marker = this.LOCATE.placeMarker
   }
 
 
 ionViewDidLoad(){
   this.LOCATE.drawMap();
-}
+  
 
 }
+}
+
+
+
