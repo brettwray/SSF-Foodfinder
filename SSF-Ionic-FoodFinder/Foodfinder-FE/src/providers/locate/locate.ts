@@ -9,11 +9,14 @@ declare var google;
 export class LocateProvider {
 //Initialize variables
   allPlaces: any;
+  removedPlaces: any;
+  newPlaces:any;
   map: any;
   marker: any;
   placeMarker:any;
   placeLoc: any;
   placeId: string;
+  newPlace;
   //custom icon for places
   placeIcon = '../../assets/imgs/hamburger_emoji_64.png'
 constructor(public http: HttpClient, public geolocation: Geolocation, public storage: Storage) {}
@@ -41,22 +44,51 @@ async mapData() {
   this.map = new google.maps.Map(document.getElementById('map'), mapOptions)
   this.marker = new google.maps.Marker({position: currentPos, map: this.map})
   let service = new google.maps.places.PlacesService(this.map);
+  let nearbySearchOptions = {
+    location: await currentPos,
+    radius: 2000,
+    type:['restaurant'],
+    openNow: true,
+  }
   //starts searching for nearby places
   let placeSearch = (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
     this.allPlaces = results;
+    console.log(results,'results', results.length, this.allPlaces.length)
     let rand = this.allPlaces[(Math.random() * results.length) | 0]
-    this.allPlaces.pop(rand)
     createMarker(rand);
+
     }
   }
+  //QUESTIONABLE *Review This*
+  let filterOutPlaces = () => {
+    for (let i =0; i <= this.removedPlaces.length; i++){
+      let remove = this.allPlaces.includes(this.removedPlaces[i].place_id)
+      let removeIndex = this.allPlaces.indexOf(remove)
+      this.newPlaces = this.allPlaces.splice(removeIndex, 1)
+    }
+    
+  }
+  
+  
+  let addToRadius = (currentRadius) =>{
+    nearbySearchOptions.radius = currentRadius + 150;
+    console.log('add', nearbySearchOptions.radius)
+    service.nearbySearch(nearbySearchOptions, placeSearch)
+  }
+  this.newPlace = () => {
+    if(this.allPlaces.length >= 1) {
+      console.log(nearbySearchOptions.radius)
+    this.placeMarker.setMap(null)
+    let rand = this.allPlaces[(Math.random() * this.allPlaces.length) | 0]
+    createMarker(rand)
+    } else {
+      addToRadius(nearbySearchOptions.radius)
+    }
+  }
+  
     //refines the place search to a radius near the user, and refines the type of places
-    service.nearbySearch({
-    location: await currentPos,
-    radius: 1000,
-    type:['restaurant'],
-    openNow: true,
-  }, placeSearch);
+    service.nearbySearch(nearbySearchOptions, placeSearch);
   //creates a marker for the nearby place.
   let createMarker = async (place) => {
     this.placeLoc = place.geometry.location;
@@ -71,6 +103,9 @@ async mapData() {
           content: place.name
         })
         infowindow.open(this.map, this.placeMarker);
+        let placeIndex = this.allPlaces.indexOf(place);
+        this.removedPlaces = this.allPlaces.splice(placeIndex,1)
+        console.log(this.allPlaces, this.allPlaces.length, this.removedPlaces)
   }
 
 }

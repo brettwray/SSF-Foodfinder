@@ -24,6 +24,9 @@ ionViewDidLoad(){
   
 
 }
+getNewPlace(){
+  this.LOCATE.newPlace()
+}
 }
 
 
