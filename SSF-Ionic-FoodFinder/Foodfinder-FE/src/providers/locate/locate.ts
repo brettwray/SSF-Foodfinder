@@ -45,6 +45,8 @@ async mapData() {
   this.marker = new google.maps.Marker({position: currentPos, map: this.map})
   let service = new google.maps.places.PlacesService(this.map);
   let bounds = new google.maps.LatLngBounds();
+  const directionsService = new google.maps.DirectionsService;
+  const directionsDisplay = new google.maps.DirectionsRenderer;
   let nearbySearchOptions = {
     location: await currentPos,
     radius: 2000,
@@ -82,7 +84,6 @@ async mapData() {
       addToRadius(nearbySearchOptions.radius)
     }
   }
-  
     //refines the place search to a radius near the user, and refines the type of places
     service.nearbySearch(nearbySearchOptions, placeSearch);
   //creates a marker for the nearby place.
@@ -95,10 +96,9 @@ async mapData() {
           position: this.placeLoc,
           icon: this.placeIcon,
           animation: google.maps.Animation.DROP,
-          
         });
         let infowindow = new google.maps.InfoWindow({
-          content: place.name
+          content: place.name 
         })
         infowindow.open(this.map, this.placeMarker);
         let placeIndex = this.allPlaces.indexOf(place);
@@ -107,8 +107,24 @@ async mapData() {
         bounds.extend(this.placeMarker.getPosition())
         bounds.extend(currentPos)
         this.map.fitBounds(bounds);
-
-       
+        showDirections(directionsService,directionsDisplay, this.placeMarker.position)
+  }
+  directionsDisplay.setMap(await this.map);
+  let showDirections = (directionsService, directionsDisplay, place) => {
+    directionsService.route({  
+    origin: currentPos,
+    destination: place,
+    travelMode: 'DRIVING'
+    }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setOptions({
+          suppressMarkers: true
+        })
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
   }
 }
 //draws the map, adds the user marker, and the place marker
