@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
-
+import * as _ from 'lodash'
 declare var google;
 
 @Injectable()
 export class LocateProvider {
 //Initialize variables
   allPlaces: any;
-  removedPlaces: any;
+  removedPlaces: any = [];
   newPlaces:any;
   map: any;
   marker: any;
@@ -44,6 +44,7 @@ async mapData() {
   this.map = new google.maps.Map(document.getElementById('map'), mapOptions)
   this.marker = new google.maps.Marker({position: currentPos, map: this.map})
   let service = new google.maps.places.PlacesService(this.map);
+  let bounds = new google.maps.LatLngBounds();
   let nearbySearchOptions = {
     location: await currentPos,
     radius: 2000,
@@ -54,27 +55,21 @@ async mapData() {
   let placeSearch = (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
     this.allPlaces = results;
-    console.log(results,'results', results.length, this.allPlaces.length)
     let rand = this.allPlaces[(Math.random() * results.length) | 0]
     createMarker(rand);
 
     }
   }
-  //QUESTIONABLE *Review This*
-  let filterOutPlaces = () => {
-    for (let i =0; i <= this.removedPlaces.length; i++){
-      let remove = this.allPlaces.includes(this.removedPlaces[i].place_id)
-      let removeIndex = this.allPlaces.indexOf(remove)
-      this.newPlaces = this.allPlaces.splice(removeIndex, 1)
-    }
-    
+  let filterOutPlaces = (results, status) =>{
+   this.allPlaces = []
+   this.allPlaces =  _.differenceBy(results, this.removedPlaces, 'place_id')
+   console.log(this.allPlaces)
+    placeSearch(this.allPlaces, status)
   }
   
-  
   let addToRadius = (currentRadius) =>{
-    nearbySearchOptions.radius = currentRadius + 150;
-    console.log('add', nearbySearchOptions.radius)
-    service.nearbySearch(nearbySearchOptions, placeSearch)
+    nearbySearchOptions.radius = currentRadius + 250;
+    service.nearbySearch(nearbySearchOptions, filterOutPlaces)
   }
   this.newPlace = () => {
     if(this.allPlaces.length >= 1) {
@@ -83,6 +78,7 @@ async mapData() {
     let rand = this.allPlaces[(Math.random() * this.allPlaces.length) | 0]
     createMarker(rand)
     } else {
+      this.placeMarker.setMap(null)
       addToRadius(nearbySearchOptions.radius)
     }
   }
@@ -93,21 +89,27 @@ async mapData() {
   let createMarker = async (place) => {
     this.placeLoc = place.geometry.location;
     this.placeId = place.id
+    this.removedPlaces.push(place)
         this.placeMarker = new google.maps.Marker({
           map: await this.map,
           position: this.placeLoc,
           icon: this.placeIcon,
           animation: google.maps.Animation.DROP,
+          
         });
         let infowindow = new google.maps.InfoWindow({
           content: place.name
         })
         infowindow.open(this.map, this.placeMarker);
         let placeIndex = this.allPlaces.indexOf(place);
-        this.removedPlaces = this.allPlaces.splice(placeIndex,1)
-        console.log(this.allPlaces, this.allPlaces.length, this.removedPlaces)
-  }
+        this.allPlaces.splice(placeIndex,1)
+        this.map.setCenter(currentPos)
+        bounds.extend(this.placeMarker.getPosition())
+        bounds.extend(currentPos)
+        this.map.fitBounds(bounds);
 
+       
+  }
 }
 //draws the map, adds the user marker, and the place marker
 drawMap(){
