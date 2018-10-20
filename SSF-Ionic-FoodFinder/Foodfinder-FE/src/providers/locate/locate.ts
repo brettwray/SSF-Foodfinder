@@ -16,6 +16,7 @@ export class LocateProvider {
   placeMarker:any;
   placeLoc: any;
   placeId: string;
+  placeName: string;
   newPlace;
   //custom icon for places
   placeIcon = '../../assets/imgs/hamburger_emoji_64.png'
@@ -90,6 +91,7 @@ async mapData() {
   let createMarker = async (place) => {
     this.placeLoc = place.geometry.location;
     this.placeId = place.id
+    this.placeName = place.name;
     this.removedPlaces.push(place)
         this.placeMarker = new google.maps.Marker({
           map: await this.map,
