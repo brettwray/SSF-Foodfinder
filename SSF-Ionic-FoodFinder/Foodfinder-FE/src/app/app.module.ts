@@ -12,6 +12,7 @@ import { AccountPage } from './../pages/account/account';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocateProvider } from '../providers/locate/locate';
 import { IonicStorageModule } from '@ionic/storage'
+import { PlaceDetailsProvider } from '../providers/place-details/place-details';
 
 
 
@@ -40,6 +41,7 @@ import { IonicStorageModule } from '@ionic/storage'
     AuthProvider,
     Geolocation,
     LocateProvider,
+    PlaceDetailsProvider,
   ]
 })
 export class AppModule {}

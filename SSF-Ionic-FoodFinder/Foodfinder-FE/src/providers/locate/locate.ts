@@ -89,8 +89,9 @@ async mapData() {
     service.nearbySearch(nearbySearchOptions, placeSearch);
   //creates a marker for the nearby place.
   let createMarker = async (place) => {
+    console.log('place', place)
     this.placeLoc = place.geometry.location;
-    this.placeId = place.id
+    this.placeId = place.place_id
     this.placeName = place.name;
     this.removedPlaces.push(place)
         this.placeMarker = new google.maps.Marker({
