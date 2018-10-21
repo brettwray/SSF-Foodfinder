@@ -6,31 +6,47 @@ declare var google;
 
 @Injectable()
 export class PlaceDetailsProvider {
+place_id:string;
+data : {};
+name: string;
+phone_number: string;
+address: string;
+openNow: boolean;
+hours: [];
+photos:[];
+rating: number;
+reviews: [];
+website: string;
+ constructor(public http: HttpClient) {}
 
-  constructor(public http: HttpClient) {}
 
-getPlaceInfo(ID, map) {
-  console.log('1', ID, map)
-
+getPlaceInfo = (ID, map) => {
+this.place_id = ID;
 
 let service = new google.maps.places.PlacesService(map)
-console.log('2',service)
 
-let getInfo = (place, status) => {
-  console.log('3', place, status)
+let getInfo = async (place, status) => {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    console.log(place)
+    this.name= place.name,
+    this.phone_number= place.formatted_phone_number,
+    this.address= place.formatted_address,
+    this.openNow= place.opening_hours.open_now,
+    this.hours= place.opening_hours.weekday_text,
+    this.photos= place.photos,
+    this.rating= place.rating,
+    this.reviews= place.reviews,
+    this.website= place.web
   } else {
-    console.log('ERROR')
+    console.error('error message',)
   }
+  
 }
 let request = {
   placeId: ID,
-  fields:['formatted_phone_number', 'formatted_address', 'opening_hours', 'photos', 'rating', 'reviews','website' ]
+  fields:['formatted_phone_number', 'formatted_address', 'opening_hours', 'photos', 'rating', 'reviews','website', 'name' ]
 }
 
 service.getDetails(request, getInfo)
-
 }
 
 

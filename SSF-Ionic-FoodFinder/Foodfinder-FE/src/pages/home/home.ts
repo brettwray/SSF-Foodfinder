@@ -1,6 +1,6 @@
 import { LocateProvider } from './../../providers/locate/locate';
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController } from 'ionic-angular';
+import { NavController, ActionSheetController, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { PlaceDetailsProvider } from '../../providers/place-details/place-details';
 
@@ -11,25 +11,38 @@ import { PlaceDetailsProvider } from '../../providers/place-details/place-detail
 })
 export class HomePage {
 Place_Marker;
-
-
-  constructor(public navCtrl: NavController, public LOCATE: LocateProvider, public storage: Storage, public action: ActionSheetController, public details: PlaceDetailsProvider) {
-    this.LOCATE.mapData();
-    this.Place_Marker = this.LOCATE.placeMarker
-  }
+ready;
+  constructor(public navCtrl: NavController,
+    public LOCATE: LocateProvider,
+    public storage: Storage,
+    public action: ActionSheetController,
+    public details: PlaceDetailsProvider,
+    public loading: LoadingController) {
+      
+      this.LOCATE.mapData();
+      this.Place_Marker = this.LOCATE.placeMarker
+    }
 ionViewDidLoad(){
   this.LOCATE.drawMap();
 }
+presentLoader(){
+  let load = this.loading.create({
+    content:'Please Wait...',
+    spinner: 'dots',
+  })
+  load.present()
+}
 presentActionSheet() {
+  this.details.getPlaceInfo(this.LOCATE.placeId, this.LOCATE.map)
   let Action = this.action.create({
     title: this.LOCATE.placeName + " Options",
     buttons: [
       {
         text: this.LOCATE.placeName + " Info",
-        handler: () => {
-          this.details.getPlaceInfo(this.LOCATE.placeId, this.LOCATE.map)
-          console.log('b4', this.LOCATE.placeId)
-        }
+        handler: async () => {
+          await this.details.rating
+          console.log(this.details.rating)
+        }      
       },
       {
         text: "Get Directions",
@@ -38,7 +51,7 @@ presentActionSheet() {
         }
       },
       {
-        text: "Read Reviews",
+        text: "Mark As Favorite",
         handler: () => {
 
         }
