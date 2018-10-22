@@ -1,3 +1,4 @@
+import { PlaceInfoPage } from './../pages/place-info/place-info';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -13,6 +14,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { LocateProvider } from '../providers/locate/locate';
 import { IonicStorageModule } from '@ionic/storage'
 import { PlaceDetailsProvider } from '../providers/place-details/place-details';
+import { StarRatingModule } from 'ionic3-star-rating';
 
 
 
@@ -20,11 +22,13 @@ import { PlaceDetailsProvider } from '../providers/place-details/place-details';
   declarations: [
     MyApp,
     HomePage,
-    AccountPage
+    AccountPage,
+    PlaceInfoPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    StarRatingModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
   ],
@@ -32,7 +36,8 @@ import { PlaceDetailsProvider } from '../providers/place-details/place-details';
   entryComponents: [
     MyApp,
     HomePage,
-    AccountPage
+    AccountPage,
+    PlaceInfoPage
   ],
   providers: [
     StatusBar,

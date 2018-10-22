@@ -1,3 +1,4 @@
+import { PlaceInfoPage } from './../place-info/place-info';
 import { LocateProvider } from './../../providers/locate/locate';
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, LoadingController } from 'ionic-angular';
@@ -39,9 +40,18 @@ presentActionSheet() {
     buttons: [
       {
         text: this.LOCATE.placeName + " Info",
-        handler: async () => {
-          await this.details.rating
-          console.log(this.details.rating)
+        handler: () => {
+          this.navCtrl.push(PlaceInfoPage, {
+            name: this.details.name,
+            phone_number: this.details.phone_number,
+            address: this.details.address,
+            openNow: this.details.openNow,
+            hours: this.details.hours,
+            photos: this.details.photos,
+            rating: this.details.rating,
+            reviews: this.details.reviews,
+            website: this.details.website
+          })
         }      
       },
       {

@@ -13,7 +13,7 @@ phone_number: string;
 address: string;
 openNow: boolean;
 hours: [];
-photos:[];
+photos = [] as URL[];
 rating: number;
 reviews: [];
 website: string;
@@ -32,12 +32,16 @@ let getInfo = async (place, status) => {
     this.address= place.formatted_address,
     this.openNow= place.opening_hours.open_now,
     this.hours= place.opening_hours.weekday_text,
-    this.photos= place.photos,
     this.rating= place.rating,
     this.reviews= place.reviews,
-    this.website= place.web
-  } else {
-    console.error('error message',)
+    this.website= place.website
+    
+    for(let i = 0; i < place.photos.length; i++){
+    this.photos[i] = place.photos[i].getUrl({
+      maxWidth:300
+    })
+  }
+  }   else {
   }
   
 }
