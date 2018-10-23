@@ -35,6 +35,7 @@ let getInfo = async (place, status) => {
     this.rating= place.rating,
     this.reviews= place.reviews,
     this.website= place.website
+    console.log(place.reviews)
     
     for(let i = 0; i < place.photos.length; i++){
     this.photos[i] = place.photos[i].getUrl({
