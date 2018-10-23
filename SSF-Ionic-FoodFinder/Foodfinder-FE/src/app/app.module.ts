@@ -1,7 +1,7 @@
 import { PlaceInfoPage } from './../pages/place-info/place-info';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, Icon } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +14,6 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { LocateProvider } from '../providers/locate/locate';
 import { IonicStorageModule } from '@ionic/storage'
 import { PlaceDetailsProvider } from '../providers/place-details/place-details';
-import { StarRatingModule } from 'ionic3-star-rating';
 
 
 
@@ -28,7 +27,6 @@ import { StarRatingModule } from 'ionic3-star-rating';
   imports: [
     BrowserModule,
     HttpClientModule,
-    StarRatingModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
   ],

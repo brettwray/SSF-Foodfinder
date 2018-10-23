@@ -10,7 +10,7 @@ import { LocateProvider } from './../providers/locate/locate';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = AccountPage;
+  rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public LOCATE: LocateProvider) {
     platform.ready().then(() => {

@@ -12,10 +12,10 @@ name: string;
 phone_number: string;
 address: string;
 openNow: boolean;
-hours: [];
+hours: any;
 photos = [] as URL[];
 rating: number;
-reviews: [];
+reviews: any;
 website: string;
  constructor(public http: HttpClient) {}
 
