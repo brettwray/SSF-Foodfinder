@@ -1,7 +1,8 @@
+import { ImageViewerPage } from './../pages/image-viewer/image-viewer';
 import { PlaceInfoPage } from './../pages/place-info/place-info';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule, Icon } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,14 +17,14 @@ import { IonicStorageModule } from '@ionic/storage'
 import { PlaceDetailsProvider } from '../providers/place-details/place-details';
 
 
-
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     AccountPage,
-    PlaceInfoPage
-  ],
+    PlaceInfoPage,
+    ImageViewerPage
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -35,7 +36,8 @@ import { PlaceDetailsProvider } from '../providers/place-details/place-details';
     MyApp,
     HomePage,
     AccountPage,
-    PlaceInfoPage
+    PlaceInfoPage,
+    ImageViewerPage    
   ],
   providers: [
     StatusBar,

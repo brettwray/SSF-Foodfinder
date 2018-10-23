@@ -1,7 +1,7 @@
+import { ImageViewerPage } from './../image-viewer/image-viewer';
 import { PlaceDetailsProvider } from './../../providers/place-details/place-details';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 
 @IonicPage()
 @Component({
@@ -38,6 +38,12 @@ website: string;
   getRatings = () => {
    this.ratings = Array.from({length: this.ratingRound}, (r, i)=> i+1)
    return this.ratings
+   }
+   viewImages = () =>{
+     this.navCtrl.push(ImageViewerPage,{
+      name: this.name,
+      photos: this.photos
+     })
    }
 ionViewDidEnter(){
 this.getRatings()

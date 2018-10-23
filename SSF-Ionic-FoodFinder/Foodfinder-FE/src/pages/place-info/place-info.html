@@ -5,21 +5,10 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
 <ion-row>
   <ion-col col-6>
-<img src={{photos[0]}}>
-<img *ngIf="photos[1]" src={{photos[1]}}>
-<img *ngIf="photos[2]" src={{photos[2]}}>
-<img *ngIf="photos[3]" src={{photos[3]}}>
-<img *ngIf="photos[4]" src={{photos[4]}}>
-<img *ngIf="photos[5]" src={{photos[5]}}>
-<img *ngIf="photos[6]" src={{photos[6]}}>
-<img *ngIf="photos[7]" src={{photos[7]}}>
-<img *ngIf="photos[8]" src={{photos[8]}}>
-<img *ngIf="photos[9]" src={{photos[9]}}>
+<img src={{photos[0]}} (click)="viewImages()">
 </ion-col>
 <ion-col col-6>
   <ion-row>
@@ -36,7 +25,7 @@
 </ion-row>
 </ion-col>
   <ion-row>
-    
+      
   </ion-row>
 
 </ion-row>
