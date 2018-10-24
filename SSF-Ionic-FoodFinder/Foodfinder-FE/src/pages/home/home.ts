@@ -1,3 +1,4 @@
+import { AuthProvider, IdentityConfirmation } from './../../providers/auth/auth';
 import { PlaceInfoPage } from './../place-info/place-info';
 import { LocateProvider } from './../../providers/locate/locate';
 import { Component } from '@angular/core';
@@ -13,13 +14,15 @@ import { PlaceDetailsProvider } from '../../providers/place-details/place-detail
 export class HomePage {
 Place_Marker;
 ready;
-  constructor(public navCtrl: NavController,
+  constructor(
+    public identity: IdentityConfirmation,
+    public auth: AuthProvider,
+    public navCtrl: NavController,
     public LOCATE: LocateProvider,
     public storage: Storage,
     public action: ActionSheetController,
     public details: PlaceDetailsProvider,
     public loading: LoadingController) {
-      
       this.LOCATE.mapData();
       this.Place_Marker = this.LOCATE.placeMarker
     }
@@ -54,18 +57,12 @@ presentActionSheet() {
           })
         }      
       },
-      {
-        text: "Get Directions",
-        handler: () => {
+      // {
+      //   text: "Mark As Favorite",
+      //   handler: () => {
 
-        }
-      },
-      {
-        text: "Mark As Favorite",
-        handler: () => {
-
-        }
-      }
+      //   }
+      // }
     ]
   })
 

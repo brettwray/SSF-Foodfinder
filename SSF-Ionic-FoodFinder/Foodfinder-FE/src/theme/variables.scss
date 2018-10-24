@@ -34,11 +34,13 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary: #000046,  
+  lightBlue:    #488aff,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  
 );
 
 
@@ -83,6 +85,27 @@ $colors: (
 
 // Fonts
 // --------------------------------------------------
-
-@import "roboto";
-@import "noto-sans";
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  src: url(../assets/fonts/Montserrat/Montserrat-Regular.ttf)
+}
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  font-style: semi-bold;
+  font-weight: 800;
+  src: url(../assets/fonts/Montserrat/Montserrat-Medium.ttf)
+}
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  font-style: light;
+  font-weight: 300;
+  src: url(../assets/fonts/Montserrat/Montserrat-LightItalic.ttf)
+}
+@font-face {
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  src: url(../assets/fonts/Raleway/Raleway-Light.ttf)
+}

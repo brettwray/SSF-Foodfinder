@@ -1,6 +1,8 @@
 // http://ionicframework.com/docs/theming/
 
-
+$font-family-heading: "Montserrat", sans-serif !default;
+$font-family-small-heading: "Montserrat", sans-serif !default;
+$font-family-cursive: "Raleway", sans-serif;
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +16,24 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+ion-toolbar {
+    background-color: #000046;
+    font-family: 'Raleway', sans-serif !important;
+    color: #fff;
+}
+ion-content {
+    background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+h1, h2{
+    font-family: $font-family-heading;
+    font-weight: 800;
+}
+h3, h4, h5, h6 {
+    font-family: $font-family-small-heading;
+    font-weight: 300 !important;
+}
+p {
+    font-family: $font-family-cursive;
+}

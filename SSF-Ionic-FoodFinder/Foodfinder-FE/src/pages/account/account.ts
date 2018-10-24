@@ -100,7 +100,6 @@ export class AccountPage {
   }
   public login(){
     if (!this.email.value || !this.password.value) {
-      console.log(this.State)
       return;
       
   }

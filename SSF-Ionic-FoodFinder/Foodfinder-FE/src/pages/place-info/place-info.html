@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{name}}</ion-title>
+    <ion-title id="title">{{name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -42,10 +42,10 @@
 <ion-row justify-content-center>
   <ion-col col-10>
   <ion-col >  
-      <button full class="contact-button" ion-button><a href="tel:{{phone_number}}"></a><ion-icon name="call"> {{phone_number}}</ion-icon></button>
+      <button color="light" full class="contact-button" ion-button><a href="tel:{{phone_number}}"></a><ion-icon name="call"> {{phone_number}}</ion-icon></button>
     </ion-col>
   <ion-col >
-      <button full class="contact-button" ion-button><a href="{{website}}"></a><ion-icon name="md-exit"> Website</ion-icon>
+      <button color="light" full class="contact-button" ion-button><a href="{{website}}"></a><ion-icon name="md-exit"> Website</ion-icon>
       </button>
   </ion-col>
 </ion-col>

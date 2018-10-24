@@ -1,3 +1,4 @@
+import { IdentityConfirmation } from './../providers/auth/auth';
 import { ImageViewerPage } from './../pages/image-viewer/image-viewer';
 import { PlaceInfoPage } from './../pages/place-info/place-info';
 import { BrowserModule } from '@angular/platform-browser';
@@ -43,6 +44,7 @@ import { PlaceDetailsProvider } from '../providers/place-details/place-details';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
+    IdentityConfirmation,
     Geolocation,
     LocateProvider,
     PlaceDetailsProvider,

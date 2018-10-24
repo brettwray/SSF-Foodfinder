@@ -1,17 +1,16 @@
-<ion-content padding-left
+        <ion-content padding-left
              padding-right>
 
   <div class="process">
     <div class="first-bounce"></div>
     <div class="second-bounce"></div>
   </div>
-
-  <h2 *ngIf="view === State.Authenticated"
-      text-center>
-    Hello no. {{user.id}}!
-  </h2>
-
-  <form [formGroup]="accountForm">
+  <div id="Intro">
+          <h1>Food Finder</h1>
+          <ion-icon name="map" size="128"></ion-icon>
+          <h2>The Easiest Way To Decide Where To Eat.</h2>
+  </div>
+  <form id="form"[formGroup]="accountForm">
     <ion-list *ngIf="view !== State.Confirm && view !== State.Authenticated"
               no-lines>
 
@@ -75,28 +74,28 @@
               ion-button
               block
               round
-              color="white"
+              color="light"
               type="button">login</button>
-
+        <ion-grid>
+                <ion-row justify-content-center>
       <button (click)="signUp()"
               ion-button
-              block
               margin-top
               round
-              clear
+              color="light"
               small
-              color="white"
               type="button">sign up</button>
-
+                                </ion-row>
+                                <ion-row justify-content-center>
       <button (click)="recoverPassword()"
               ion-button
-              block
               margin-top
               round
-              clear
+              color="light"
               small
-              color="white"
               type="button">forgot password</button>
+              </ion-row>
+        </ion-grid>
     </div>
 
     <button *ngIf="view === State.Create"
@@ -105,7 +104,7 @@
             ion-button
             block
             round
-            color="white"
+            color="light"
             type="button">create account</button>
 
     <button *ngIf="view === State.ChangePassword"
@@ -114,7 +113,7 @@
             ion-button
             block
             round
-            color="white"
+            color="light"
             type="button">change password</button>
 
 
@@ -127,7 +126,7 @@
             round
             clear
             small
-            color="white"
+            color="light"
             type="button">{{ view === State.Confirm ? 'back' : 'cancel' }}</button>
 
     <button (click)="logout()"
@@ -143,3 +142,4 @@
 
   </form>
 </ion-content>
+

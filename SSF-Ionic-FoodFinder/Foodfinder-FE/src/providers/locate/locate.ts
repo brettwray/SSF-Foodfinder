@@ -40,6 +40,12 @@ async mapData() {
     zoom: 15,
     center: currentPos,
     mapTypeControl: false,
+    zoomControl: true,
+    zoomControlOptions:{
+      position: google.maps.ControlPosition.RIGHT_CENTER
+    },
+    streetViewControl: false,
+    fullscreenControl: false,
   }
   //Draws the map, features, and defines the places service
   this.map = new google.maps.Map(document.getElementById('map'), mapOptions)
@@ -67,8 +73,7 @@ async mapData() {
   let filterOutPlaces = (results, status) =>{
    this.allPlaces = []
    this.allPlaces =  _.differenceBy(results, this.removedPlaces, 'place_id')
-   console.log(this.allPlaces)
-    placeSearch(this.allPlaces, status)
+   placeSearch(this.allPlaces, status)
   }
   //Adds 250 meters to the radius of the search for nearby places.
   let addToRadius = (currentRadius) =>{

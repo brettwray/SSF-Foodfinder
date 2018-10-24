@@ -1,3 +1,30 @@
 page-account {
+   ion-content {
+    background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+   }
+   #form{
+       padding-top: 10%;
+   }
+   #Intro  {
+       padding-top: 10%;
+       color: #fff;
+       font-weight: 600;
+       text-align: center;
+   }
+   #Intro H1 {
+       font-size: 3.8em;
+   }
+   #Intro h2 {
+       font-size: 2em;
+   }
+   #Intro ion-icon {
+       font-size: 128px;
+   }
+   ion-button {
+       color: #000046;
+       background-color: #fff;
+   }
 }
