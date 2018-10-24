@@ -6,10 +6,8 @@
   </ion-navbar>
 
 </ion-header>
-
-
-<ion-content padding>
-    <ion-slides class="image-slider" loop="true" slidesPerView="2">
+<ion-content id="body" padding>
+    <ion-slides class="image-slider" loop="true" slidesPerView="1">
         <ion-slide *ngFor="let img of photos">
         <img src="{{img}}" class="thumb-img" imageViewer/>
         </ion-slide>

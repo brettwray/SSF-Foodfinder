@@ -6,7 +6,7 @@
 
 </ion-header>
 <ion-content>
-<ion-grid>
+<ion-grid id="body">
   <!-- Header Image Starts Here -->
 <ion-row id="header">
   <ion-col>
@@ -15,14 +15,11 @@
 </ion-row>
 <!-- Place Information Starts Here -->
 <ion-row>
-<ion-col>
-  <ion-card id="reviews" padding>
-    <ion-card-content>  
-    <ion-row>
-          <ion-col>
-            <ion-card-title>{{name}}</ion-card-title>
-          </ion-col>
-        </ion-row>
+  <ion-card>
+    <ion-card-content> 
+        <ion-card-title>{{name}}</ion-card-title>
+        <ion-card>
+          <ion-card-content>
     <ion-row align-items-center>
       <ion-col col-4>
       <p>Rating</p>
@@ -38,7 +35,8 @@
   </ion-row>
 </ion-card-content>
 </ion-card>
-</ion-col>
+</ion-card-content>
+</ion-card>
 </ion-row>
 <!-- Contact buttons Start here -->
 <ion-row justify-content-center>
@@ -76,11 +74,12 @@
         <ion-card-content>
           <ion-row>
           <ion-col col-4>
-            <ion-img src="{{review.profile_photo_url}}">
+            <ion-img id="review-thumb" src="{{review.profile_photo_url}}">
             </ion-img>
           </ion-col>
           <ion-col col-6>
-            <h4>{{review.author_name}}</h4>
+            <h4 id="review-author">{{review.author_name}}</h4>
+            <h4 id="review-timeframe">{{review.relative_time_description}}</h4>
           </ion-col>
         </ion-row>
           <ion-col>
