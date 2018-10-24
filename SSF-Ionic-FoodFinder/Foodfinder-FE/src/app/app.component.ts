@@ -1,4 +1,3 @@
-import { HomePage } from './../pages/home/home';
 import { AccountPage } from './../pages/account/account';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
@@ -10,7 +9,7 @@ import { LocateProvider } from './../providers/locate/locate';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = AccountPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public LOCATE: LocateProvider) {
     platform.ready().then(() => {

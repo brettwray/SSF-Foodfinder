@@ -63,7 +63,6 @@ export class AccountPage {
 
   private urlParams: object = {};
 
-
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public location: Location,
@@ -101,7 +100,9 @@ export class AccountPage {
   }
   public login(){
     if (!this.email.value || !this.password.value) {
+      console.log(this.State)
       return;
+      
   }
   const account: Account = {
     firstName: this.firstName.value,
@@ -347,4 +348,6 @@ private handleResponse(confirm: ResponseConfirmation) {
         this.urlParams[decode(match[1])] = decode(match[2]);
     }
   }
+
+
 }

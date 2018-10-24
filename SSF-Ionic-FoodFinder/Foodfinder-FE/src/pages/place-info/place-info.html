@@ -5,55 +5,91 @@
   </ion-navbar>
 
 </ion-header>
-<ion-content padding>
-<ion-row>
-  <ion-col col-6>
-<img ion-thumbnail src={{photos[0]}} (click)="viewImages()">
+<ion-content>
+<ion-grid>
+  <!-- Header Image Starts Here -->
+<ion-row id="header">
+  <ion-col>
+  <ion-img id="headerImg" src={{photos[0]}} (click)="viewImages()"></ion-img>
 </ion-col>
-<ion-col col-6>
-  <ion-card padding>
-  <ion-row>
-  <div *ngFor="let num of ratings">
+</ion-row>
+<!-- Place Information Starts Here -->
+<ion-row>
+<ion-col>
+  <ion-card id="reviews" padding>
+    <ion-card-content>  
+    <ion-row>
+          <ion-col>
+            <ion-card-title>{{name}}</ion-card-title>
+          </ion-col>
+        </ion-row>
+    <ion-row align-items-center>
+      <ion-col col-4>
+      <p>Rating</p>
+    </ion-col>
+    <div *ngFor="let num of ratings">
   <ion-icon id="starIcon" name="ios-star" ></ion-icon>
   </div>
-</ion-row>
-<ion-row>
+    </ion-row>
+    <ion-row>
     <ion-col>
-      <h6>Rating: {{rating}}/5</h6>
+      <p>{{address}}</p>
     </ion-col>
   </ion-row>
+</ion-card-content>
 </ion-card>
 </ion-col>
-<ion-row>
-  <ion-col col-6 padding>  
-      <button ion-button><a href="tel:{{phone_number}}"></a><ion-icon name="call"> {{phone_number}}</ion-icon></button>
+</ion-row>
+<!-- Contact buttons Start here -->
+<ion-row justify-content-center>
+  <ion-col col-10>
+  <ion-col >  
+      <button full class="contact-button" ion-button><a href="tel:{{phone_number}}"></a><ion-icon name="call"> {{phone_number}}</ion-icon></button>
     </ion-col>
-  <ion-col col-6 padding>
-      <button ion-button><a href="{{website}}"></a><ion-icon name="md-exit"> Website</ion-icon>
+  <ion-col >
+      <button full class="contact-button" ion-button><a href="{{website}}"></a><ion-icon name="md-exit"> Website</ion-icon>
       </button>
   </ion-col>
+</ion-col>
 </ion-row>
-<ion-row>
-    <ion-card padding>{{address}}</ion-card>
-</ion-row>
-</ion-row>
-<ion-row>
-  <ion-card padding>
-    <ion-card-header>Hours</ion-card-header>
-    <ion-card-content>
-      <ion-item-group *ngFor="let hour of hours">
-        <ion-item>{{hour}}</ion-item>
-        </ion-item-group>
-    </ion-card-content>
-  </ion-card>
-</ion-row>
+<!-- Hours Card Starts Here -->
 <ion-row>
   <ion-card>
-    <ion-card-header>Reviews</ion-card-header>
-    <ion-card-content *ngFor="let review of reviews">
-      <img ion-img src="{{review.profile_photo_url}}">
-      <ion-item><p>{{review.text}}</p></ion-item>
+      <ion-card-content>
+    <ion-card-title>Hours</ion-card-title>
+      <ion-card>
+        <ion-card-content>
+      <ion-item-group *ngFor="let hour of hours">
+        <ion-item id="weekday-hours"><h4>{{hour}}</h4></ion-item>
+        </ion-item-group>
+        </ion-card-content>
+      </ion-card>
     </ion-card-content>
   </ion-card>
 </ion-row>
+  <!-- Review Card Starts Here -->
+<ion-row>
+    <ion-card>
+        <ion-card-content>
+      <ion-card-title>Reviews</ion-card-title>
+      <ion-card *ngFor="let review of reviews">
+        <ion-card-content>
+          <ion-row>
+          <ion-col col-4>
+            <ion-img src="{{review.profile_photo_url}}">
+            </ion-img>
+          </ion-col>
+          <ion-col col-6>
+            <h4>{{review.author_name}}</h4>
+          </ion-col>
+        </ion-row>
+          <ion-col>
+            <p id="review-text">{{review.text}}</p>
+          </ion-col>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+</ion-row>
+</ion-grid>
 </ion-content>

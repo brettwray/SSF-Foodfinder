@@ -16,7 +16,6 @@ import { LocateProvider } from '../providers/locate/locate';
 import { IonicStorageModule } from '@ionic/storage'
 import { PlaceDetailsProvider } from '../providers/place-details/place-details';
 
-
 @NgModule({
   declarations: [
     MyApp,

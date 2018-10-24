@@ -3,4 +3,22 @@ page-place-info {
     font-size: 24px;
     color: darkgoldenrod;
 }
+#header {
+    background-color: #000;
+    width: 100%;
+    min-height: 200px;
+    max-height: 400px;
+}
+#headerImg {
+    background-color: #000;
+    width:100%;
+    min-width: 100%;
+    height: 100%;
+}
+#review-text {
+    word-wrap: break-word;
+}
+#weekday-hours {
+    padding-left: 0;
+}
 }

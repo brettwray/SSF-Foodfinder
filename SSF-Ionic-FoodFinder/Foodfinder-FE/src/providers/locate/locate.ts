@@ -63,17 +63,19 @@ async mapData() {
 
     }
   }
+  //Filters out places that have already been suggested, uses Lodash
   let filterOutPlaces = (results, status) =>{
    this.allPlaces = []
    this.allPlaces =  _.differenceBy(results, this.removedPlaces, 'place_id')
    console.log(this.allPlaces)
     placeSearch(this.allPlaces, status)
   }
-  
+  //Adds 250 meters to the radius of the search for nearby places.
   let addToRadius = (currentRadius) =>{
     nearbySearchOptions.radius = currentRadius + 250;
     service.nearbySearch(nearbySearchOptions, filterOutPlaces)
   }
+  //Creates a marker when a new place is requested.
   this.newPlace = () => {
     if(this.allPlaces.length >= 1) {
       console.log(nearbySearchOptions.radius)
@@ -99,6 +101,7 @@ async mapData() {
           icon: this.placeIcon,
           animation: google.maps.Animation.DROP,
         });
+        //ads the place name to the maker and map
         let infowindow = new google.maps.InfoWindow({
           content: place.name 
         })
@@ -111,6 +114,7 @@ async mapData() {
         this.map.fitBounds(bounds);
         showDirections(directionsService,directionsDisplay, this.placeMarker.position)
   }
+  //Shows route from users position to suggested place
   directionsDisplay.setMap(await this.map);
   let showDirections = (directionsService, directionsDisplay, place) => {
     directionsService.route({  
