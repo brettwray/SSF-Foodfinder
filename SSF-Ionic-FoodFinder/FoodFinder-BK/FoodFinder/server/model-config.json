@@ -42,5 +42,9 @@
   "applicationUser": {
     "dataSource": "foodfinder",
     "public": true
+  },
+  "favorites": {
+    "dataSource": "foodfinder",
+    "public": true
   }
 }

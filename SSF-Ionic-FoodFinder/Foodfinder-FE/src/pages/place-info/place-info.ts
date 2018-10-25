@@ -33,7 +33,6 @@ website: string;
     this.ratingRound = Math.floor(this.navParam.get('rating'))
     this.reviews = this.navParam.get('reviews')
     this.website = this.navParam.get('website')
-    console.log(this.reviews)
    }
   getRatings = () => {
    this.ratings = Array.from({length: this.ratingRound}, (r, i)=> i+1)

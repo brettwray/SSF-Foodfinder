@@ -25,7 +25,7 @@ export class NewPasswordContext {
   newPassword: string;
 }
 
-//Loopback API Endpoints & URLS
+//Loopback API Endpoints
 const BASE = 'http://localhost:3000/API/applicationUsers';
 const LOGIN = '/login';
 const LOGOUT = '/logout';
@@ -42,19 +42,19 @@ const ACCESS_TOKEN = 'access_token';
 export class AuthProvider {
 
   constructor(public http: HttpClient) {}
-  
+  //API call to create an account
   public createAccount(account:Account) {
     return this 
     .http
     .post(BASE, account, { observe: 'response' });
   }
-
+// API call to login
   public login(account:Account){
     return this
     .http
     .post(`${BASE}${LOGIN}`, account, {observe: 'response'})
   }
-
+//Api call to logout
   public logout(accessToken: string){
     const params = new HttpParams()
       .set(ACCESS_TOKEN, accessToken);
@@ -63,13 +63,13 @@ export class AuthProvider {
       .http
       .post(`${BASE}${LOGOUT}`, {}, { params: params, observe: 'response' });
   }
-
+//Api call to reset password
   public requestPasswordReset(account: Account) {
     return this
       .http
       .post(`${BASE}${RESET}`, account, { observe: 'response' });
   }
-
+//checks user ID & token to confirm user exists
   public confirm(identity: IdentityConfirmation) {
 
     const params = new HttpParams()
@@ -80,7 +80,7 @@ export class AuthProvider {
       .http
       .get(`${BASE}${CONFIRM}`, { params: params, observe: 'response' });
   }
-
+//To change password
   public setPassword(newPasswordContext: NewPasswordContext) {
 
     const params = new HttpParams()

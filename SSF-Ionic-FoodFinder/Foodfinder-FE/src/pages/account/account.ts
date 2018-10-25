@@ -13,6 +13,7 @@ class ResponseConfirmation {
   message: string;
   nextViewState: number;
 }
+//Sets the different states for the session, referenced when logging in/out/registering
 enum State {
   Login,
   Create,
@@ -21,6 +22,7 @@ enum State {
   ChangePassword,
   Authenticated
 }
+//Monitors the response in the service and associates response codes with an error.
 enum HttpStatus {
   Ok = 200,
   NoContent = 204,
@@ -85,7 +87,7 @@ export class AccountPage {
       this.view = State.Login;
     }
   }
-
+//sets up login and register form
   public ngOnInit(): void {
     this.accountForm = this.fb.group({
       firstName: [null, Validators.compose([Validators.required])],
@@ -98,6 +100,7 @@ export class AccountPage {
     this.email = this.accountForm.controls['email'];
     this.password = this.accountForm.controls['password'];
   }
+  //function for logging in to the account
   public login(){
     if (!this.email.value || !this.password.value) {
       return;
@@ -142,6 +145,7 @@ export class AccountPage {
     return;
 });
 }
+//Function for creating an account
 public createAccount() {
   if (!this.accountForm.valid) {
     console.error('All fields are required to create an account.');
@@ -186,7 +190,7 @@ public createAccount() {
       }
       });
     }
-  
+  //Confirm email address **Not functioning, this is hit when the user accepts the email validation but there is no email service connected
     private confirmEmailAddress(){
       if (!this.urlParams[UID_PARAM] || !this.urlParams[TOKEN_PARAM]) {
 
@@ -236,7 +240,7 @@ public createAccount() {
     });
   }
   
-   
+  //Function for password reset
   public setPassword() {
     if (!this.urlParams[ACCESS_TOKEN_PARAM] || !this.password.valid) {
       console.error('An accesstoken and a new password are required complete the reset password flow');
@@ -280,6 +284,7 @@ public createAccount() {
       });
 
   }
+  //Function to logout of the app
   public logout() {
     this.loader = this.loadingCtrl.create();
     this.loader.present();
@@ -309,15 +314,19 @@ public createAccount() {
 });
 
 }
+//Sets the state when the sign up button is clicked triggering the front end to display the register form
 public signUp() {
   this.view = State.Create;
 }
+//Sets the state when switching from login/register
 public back() {
   this.view = State.Login;
 }
+//Sets the state when password reset is pressed
 public recoverPassword() {
   this.view = State.Recover;
 }
+//Creates an alert in the application
 private handleResponse(confirm: ResponseConfirmation) {
 
   const alert: Alert = this.alertCtrl.create({
@@ -335,6 +344,7 @@ private handleResponse(confirm: ResponseConfirmation) {
     });
     alert.present();
   }
+  
   private parseQueryString(url: string) {
     let match,
       pl = /\+/g,
